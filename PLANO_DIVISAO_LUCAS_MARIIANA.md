@@ -35,14 +35,14 @@ Este documento organiza exatamente:
 
 ### Lucas faz
 
-- Criar classes de entidade:
-  - `Cliente`
-  - `Cartao`
-  - `SolicitacaoCancelamento`
-- Criar enums de status:
-  - `StatusCartao`
-  - `StatusSolicitacao`
-- Definir atributos obrigatorios e validacoes basicas (ex.: CPF nao vazio, id unico).
+- [x] Criar classes de entidade (`src/main/java/br/unb/eda2/loja/dominio/`):
+  - [x] `Cliente`
+  - [x] `Cartao`
+  - [x] `SolicitacaoCancelamento`
+- [x] Criar enums de status:
+  - [x] `StatusCartao`
+  - [x] `StatusSolicitacao`
+- [x] Definir atributos obrigatorios e validacoes basicas (classe `util/Validadores`: CPF 11 digitos, id > 0, e-mail se informado; unicidade de id fica para o repositorio).
 
 ### Mariiana faz
 
