@@ -46,17 +46,17 @@ Este documento organiza exatamente:
 
 ### Mariiana faz
 
-- Criar interfaces de repositorio:
-  - `ClienteRepository`
-  - `CartaoRepository`
-  - `SolicitacaoRepository`
-- Criar metodos CRUD basicos para testes iniciais.
-- Preparar menu inicial (ou classe principal) com opcoes de cadastro e busca simples.
+- [x] Criar interfaces de repositorio:
+  - [x] `ClienteRepository`
+  - [x] `CartaoRepository`
+  - [x] `SolicitacaoRepository`
+- [x] Criar metodos CRUD basicos para testes iniciais.
+- [x] Preparar menu inicial (ou classe principal) com opcoes de cadastro e busca simples.
 
 ### Entregavel da etapa
 
-- Estrutura OO funcionando.
-- Cadastro e leitura basica de clientes/cartoes.
+- [x] Estrutura OO funcionando.
+- [x] Cadastro e leitura basica de clientes/cartoes.
 
 ---
 
