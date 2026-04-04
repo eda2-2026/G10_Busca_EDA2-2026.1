@@ -20,7 +20,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 /**
- * Menu inicial: cadastro e busca simples de clientes, cartões e solicitações (Etapa 1).
+ * Menu: cadastro e buscas de clientes (inclui árvore por nome — Etapa 2), cartões e solicitações.
  */
 
 public final class LojaApp {
@@ -39,7 +39,7 @@ public final class LojaApp {
             boolean sair = false;
             while (!sair) {
                 System.out.println();
-                System.out.println("=== Loja — Menu (Etapa 1) ===");
+                System.out.println("=== Loja — Menu ===");
                 System.out.println("1 — Cadastrar cliente");
                 System.out.println("2 — Buscar cliente por ID");
                 System.out.println("3 — Buscar cliente por CPF");
@@ -49,6 +49,8 @@ public final class LojaApp {
                 System.out.println("7 — Listar cartões");
                 System.out.println("8 — Cadastrar solicitação de cancelamento");
                 System.out.println("9 — Listar solicitações");
+                System.out.println("10 — Listar clientes ordenados por nome (árvore, in-order)");
+                System.out.println("11 — Buscar cliente na árvore (nome + id)");
                 System.out.println("0 — Sair");
                 System.out.print("Opção: ");
 
@@ -64,6 +66,8 @@ public final class LojaApp {
                         case "7" -> listarCartoes(cartoes);
                         case "8" -> cadastrarSolicitacao(in, solicitacoes);
                         case "9" -> listarSolicitacoes(solicitacoes);
+                        case "10" -> listarClientesOrdenadosPorNome(clientes);
+                        case "11" -> buscarClienteNaArvore(in, clientes);
                         case "0" -> sair = true;
                         default -> System.out.println("Opção inválida.");
                     }
@@ -177,6 +181,25 @@ public final class LojaApp {
         lista.forEach(System.out::println);
     }
 
+     private static void listarClientesOrdenadosPorNome(ClienteRepositorio repo) {
+        var lista = repo.listarOrdenadosPorNome();
+        if (lista.isEmpty()) {
+            System.out.println("(nenhum cliente)");
+            return;
+        }
+        lista.forEach(System.out::println);
+    }
+
+    private static void buscarClienteNaArvore(Scanner in, ClienteRepositorio repo) {
+        System.out.print("Nome (como cadastrado): ");
+        String nome = in.nextLine();
+        long id = lerLong(in, "ID do cliente: ");
+        repo.buscarPorNomeEId(nome, id).ifPresentOrElse(
+                System.out::println,
+                () -> System.out.println("Cliente não encontrado na árvore com essa combinação nome + id.")
+        );
+    }
+    
     private static long lerLong(Scanner in, String prompt) {
         System.out.print(prompt);
         String t = in.nextLine().trim();
