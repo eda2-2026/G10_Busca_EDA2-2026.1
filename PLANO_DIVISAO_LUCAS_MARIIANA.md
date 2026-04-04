@@ -76,10 +76,10 @@ Este documento organiza exatamente:
 
 ### Mariiana faz (Arvore)
 
-- Implementar `ArvoreClientesPorNome` (ou outra chave ordenada).
-- Implementar insercao e busca na arvore.
-- Implementar percurso `in-order` para relatorios ordenados.
-- Integrar arvore com os dados de cliente.
+- [x] Implementar `ArvoreClientesPorNome` (ou outra chave ordenada).
+- [x] Implementar insercao e busca na arvore.
+- [x] Implementar percurso `in-order` para relatorios ordenados.
+- [x] Integrar arvore com os dados de cliente.
 
 ### Entregavel da etapa
 
