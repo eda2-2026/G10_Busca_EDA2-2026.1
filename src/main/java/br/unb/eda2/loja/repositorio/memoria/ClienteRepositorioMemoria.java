@@ -1,6 +1,7 @@
 package br.unb.eda2.loja.repositorio.memoria;
 
 import br.unb.eda2.loja.dominio.Cliente;
+import br.unb.eda2.loja.estrutura.ArvoreClientesPorNome;
 import br.unb.eda2.loja.repositorio.ClienteRepositorio;
 import br.unb.eda2.loja.util.Validadores;
 
@@ -18,6 +19,7 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
 
     private final Map<Long, Cliente> porId = new HashMap<>();
     private final Map<String, Long> idPorCpf = new HashMap<>();
+    private final ArvoreClientesPorNome arvorePorNome = new ArvoreClientesPorNome();
 
     @Override
     public void salvar(Cliente cliente) {
@@ -35,8 +37,13 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
             idPorCpf.remove(anterior.getCpf());
         }
 
+        if (anterior != null) {
+            arvorePorNome.remover(anterior.getNome(), anterior.getId());
+        }
+
         porId.put(id, cliente);
         idPorCpf.put(cpf, id);
+        arvorePorNome.inserir(cliente);
     }
 
     @Override
@@ -57,6 +64,15 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
     @Override
     public List<Cliente> listarTodos() {
         return new ArrayList<>(porId.values());
+    }
+    @Override
+    public List<Cliente> listarOrdenadosPorNome() {
+        return arvorePorNome.percorrerInOrder();
+    }
+
+    @Override
+    public Optional<Cliente> buscarPorNomeEId(String nome, long id) {
+        return arvorePorNome.buscar(nome, id);
     }
 
     @Override

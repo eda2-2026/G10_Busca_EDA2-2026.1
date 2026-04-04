@@ -14,5 +14,9 @@ public interface ClienteRepositorio {
     Optional<Cliente> buscarPorId(long id);
     Optional<Cliente> buscarPorCpf(String cpf);
     List<Cliente> listarTodos();
+
+    List<Cliente> listarOrdenadosPorNome(); /* Clientes em ordem lexicográfica de nome. */
+    Optional<Cliente> buscarPorNomeEId(String nome, long id); /* Busca na árvore binária pela chave ordenada (nome + id). */
+
     boolean remover(long id);
 }
