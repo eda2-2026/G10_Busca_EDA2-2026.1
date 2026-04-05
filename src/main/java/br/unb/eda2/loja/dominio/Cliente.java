@@ -14,6 +14,8 @@ public class Cliente {
     private String cpf;
     private String email;
     private String telefone;
+    /** Cliente pode ser inativado na loja; cartões não aceitam novas solicitações se inativo. */
+    private boolean ativo;
 
     public Cliente(long id, String nome, String cpf) {
         Validadores.requerIdPositivo(id, "id");
@@ -21,6 +23,7 @@ public class Cliente {
         this.id = id;
         this.nome = nome.trim();
         this.cpf = Validadores.normalizarCpf(cpf);
+        this.ativo = true;
     }
 
     public long getId() {
@@ -69,6 +72,14 @@ public class Cliente {
         this.telefone = telefone.trim();
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -88,6 +99,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{id=" + id + ", nome='" + nome + "', cpf='" + cpf + "'}";
+        return "Cliente{id=" + id + ", nome='" + nome + "', cpf='" + cpf + "', ativo=" + ativo + "}";
     }
 }

@@ -64,7 +64,7 @@ Este documento organiza exatamente:
 
 **Meta:** garantir performance e organizacao dos dados.
 
-### Lucas faz (Hashing)
+### Mariiana faz (Hashing e Arvore)
 
 - [x] Implementar `TabelaHashClientes` (chave por CPF ou id).
 - [x] Implementar `TabelaHashCartoes` (chave por idCartao).
@@ -73,9 +73,6 @@ Este documento organiza exatamente:
   - [x] `buscar`
   - [x] `remover`
 - [x] Testar casos de colisao (encadeamento ou sondagem, conforme decidido).
-
-### Mariiana faz (Arvore)
-
 - [x] Implementar `ArvoreClientesPorNome` (ou outra chave ordenada).
 - [x] Implementar insercao e busca na arvore.
 - [x] Implementar percurso `in-order` para relatorios ordenados.
@@ -94,26 +91,23 @@ Este documento organiza exatamente:
 
 ### Lucas faz
 
-- Criar `CancelamentoService`.
-- Implementar abertura de solicitacao de cancelamento.
-- Aplicar validacoes:
-  - cartao existe?
-  - cartao ja esta cancelado?
-  - cliente ativo?
-- Atualizar status do cartao ao concluir cancelamento.
-
-### Mariiana faz
-
-- Implementar fluxo de analise da solicitacao:
-  - em analise
-  - aprovada
-  - recusada
-- Criar historico de alteracoes da solicitacao.
-- Criar tela/menu para consultar solicitacoes por status.
+- [x] Criar `CancelamentoService`.
+- [x] Implementar abertura de solicitacao de cancelamento.
+- [x] Aplicar validacoes:
+  - [x] cartao existe?
+  - [x] cartao ja esta cancelado?
+  - [x] cliente ativo?
+- [x] Atualizar status do cartao ao concluir cancelamento
+- [x] Implementar fluxo de analise da solicitacao:
+  - [x] em analise
+  - [x] aprovada
+  - [x] recusada
+- [x] Criar historico de alteracoes da solicitacao.
+- [x] Criar tela/menu para consultar solicitacoes por status.
 
 ### Entregavel da etapa
 
-- Fluxo completo de cancelamento funcionando ponta a ponta.
+- [x] Fluxo completo de cancelamento funcionando ponta a ponta.
 
 ---
 
