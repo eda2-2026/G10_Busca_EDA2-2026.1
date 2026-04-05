@@ -80,8 +80,8 @@ Este documento organiza exatamente:
 
 ### Entregavel da etapa
 
-- Buscas rapidas por hash.
-- Relatorios ordenados por arvore.
+- [x] Buscas rapidas por hash.
+- [x] Relatorios ordenados por arvore.
 
 ---
 
