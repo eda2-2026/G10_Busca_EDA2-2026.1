@@ -66,13 +66,13 @@ Este documento organiza exatamente:
 
 ### Lucas faz (Hashing)
 
-- Implementar `TabelaHashClientes` (chave por CPF ou id).
-- Implementar `TabelaHashCartoes` (chave por idCartao).
-- Criar metodos:
-  - `inserir`
-  - `buscar`
-  - `remover`
-- Testar casos de colisao (encadeamento ou sondagem, conforme decidido).
+- [x] Implementar `TabelaHashClientes` (chave por CPF ou id).
+- [x] Implementar `TabelaHashCartoes` (chave por idCartao).
+- [x] Criar metodos:
+  - [x] `inserir`
+  - [x] `buscar`
+  - [x] `remover`
+- [x] Testar casos de colisao (encadeamento ou sondagem, conforme decidido).
 
 ### Mariiana faz (Arvore)
 
