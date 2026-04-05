@@ -2,13 +2,12 @@ package br.unb.eda2.loja.repositorio.memoria;
 
 import br.unb.eda2.loja.dominio.Cliente;
 import br.unb.eda2.loja.estrutura.ArvoreClientesPorNome;
+import br.unb.eda2.loja.estrutura.TabelaHashClientes;
 import br.unb.eda2.loja.repositorio.ClienteRepositorio;
 import br.unb.eda2.loja.util.Validadores;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -17,8 +16,7 @@ import java.util.Optional;
 
 public class ClienteRepositorioMemoria implements ClienteRepositorio {
 
-    private final Map<Long, Cliente> porId = new HashMap<>();
-    private final Map<String, Long> idPorCpf = new HashMap<>();
+    private final TabelaHashClientes tabela = new TabelaHashClientes();
     private final ArvoreClientesPorNome arvorePorNome = new ArvoreClientesPorNome();
 
     @Override
@@ -32,38 +30,29 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
             throw new IllegalArgumentException("CPF já cadastrado para outro cliente.");
         }
 
-        Cliente anterior = porId.get(id);
-        if (anterior != null && !anterior.getCpf().equals(cpf)) {
-            idPorCpf.remove(anterior.getCpf());
-        }
+        Cliente anterior = tabela.buscarPorId(id).orElse(null);
 
         if (anterior != null) {
             arvorePorNome.remover(anterior.getNome(), anterior.getId());
         }
 
-        porId.put(id, cliente);
-        idPorCpf.put(cpf, id);
+        tabela.inserir(cliente);
         arvorePorNome.inserir(cliente);
     }
 
     @Override
     public Optional<Cliente> buscarPorId(long id) {
-        return Optional.ofNullable(porId.get(id));
+        return tabela.buscarPorId(id);
     }
 
     @Override
     public Optional<Cliente> buscarPorCpf(String cpf) {
-        String normalizado = Validadores.normalizarCpf(cpf);
-        Long id = idPorCpf.get(normalizado);
-        if (id == null) {
-            return Optional.empty();
-        }
-        return Optional.ofNullable(porId.get(id));
+        return tabela.buscarPorCpf(cpf);
     }
 
     @Override
     public List<Cliente> listarTodos() {
-        return new ArrayList<>(porId.values());
+        return new ArrayList<>(tabela.valores());
     }
     @Override
     public List<Cliente> listarOrdenadosPorNome() {
@@ -77,11 +66,13 @@ public class ClienteRepositorioMemoria implements ClienteRepositorio {
 
     @Override
     public boolean remover(long id) {
-        Cliente removido = porId.remove(id);
-        if (removido == null) {
+        Optional<Cliente> opt = tabela.buscarPorId(id);
+        if (opt.isEmpty()) {
             return false;
         }
-        idPorCpf.remove(removido.getCpf());
+        Cliente removido = opt.get();
+        tabela.remover(id);
+        arvorePorNome.remover(removido.getNome(), removido.getId());
         return true;
     }
 }
