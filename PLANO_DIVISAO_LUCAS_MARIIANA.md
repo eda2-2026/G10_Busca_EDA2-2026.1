@@ -124,13 +124,12 @@ Este documento organiza exatamente:
 - [x] Layout, navegacao e consistencia visual (cores, espacamentos, titulos).
 - [x] Formularios e tabelas/listas para exibir resultados (clientes, cartoes, solicitacoes).
 - [x] Garantir que fluxos criticos do cancelamento fiquem faceis de mostrar ao professor.
-- [ ] Capturar prints ou roteiro de demo para a etapa final.
 
 ### Entregavel da etapa
 
-- Aplicacao com interface grafica executavel, cobrindo os fluxos principais do sistema.
-- Classe principal: `br.unb.eda2.loja.LojaGuiApp` — executar: `mvn compile exec:java@gui` (terminal continua com `mvn compile exec:java`).
-- `LojaApp` (terminal) pode permanecer como opcao de teste rapido ou ser desativado depois — combinar no grupo.
+- [x] Aplicacao com interface grafica executavel, cobrindo os fluxos principais do sistema.
+- [x] Classe principal: `br.unb.eda2.loja.LojaGuiApp` — executar: `mvn compile exec:java@gui` (terminal continua com `mvn compile exec:java`).
+- [x] `LojaApp` (terminal) pode permanecer como opcao de teste rapido ou ser desativado depois — combinar no grupo.
 
 ---
 
@@ -144,34 +143,34 @@ Este documento organiza exatamente:
 
 ### Mariiana faz
 
-- [ ] Escrever documentacao tecnica:
-  - arquitetura do sistema
-  - justificativa das estruturas (hash + arvore)
-  - analise de complexidade (Big-O)
-- [ ] Revisar padrao dos nomes de classes e metodos.
-- Criar testes de cenarios:
-  - cliente nao encontrado
-  - cartao ja cancelado
-  - solicitacao aprovada/recusada
-- Gerar relatorios finais (por status, por motivo, por periodo).
-- Separar evidencias para apresentacao (prints, execucoes e exemplos).
+- [x] Escrever documentacao tecnica:
+  - [x] arquitetura do sistema
+  - [x] justificativa das estruturas (hash + arvore)
+  - [x] analise de complexidade (Big-O)
+- [x] Revisar padrao dos nomes de classes e metodos.
+- [x] Criar testes de cenarios:
+  - [x] cliente nao encontrado
+  - [x] cartao ja cancelado
+  - [x] solicitacao aprovada/recusada
+- [x] Gerar relatorios finais (por status, por motivo, por periodo).
+- [x] Separar evidencias para apresentacao (prints, execucoes e exemplos).
 
 ### Entregavel da etapa
 
-- Projeto completo, testado e documentado.
-- Roteiro de testes usando os dados de exemplo (e casos de erro manual).
+- [x] Projeto completo, testado e documentado.
+- [x] Roteiro de testes usando os dados de exemplo (e casos de erro manual).
 
 ---
 
 ## Checklist final antes de entregar
 
-- Todas as classes compilam/executam sem erro.
-- Todas as estruturas combinadas com o professor foram implementadas (hash + arvore + dominio).
-- Hashing foi usado em busca principal.
-- Arvore foi usada para ordenacao/relatorio.
-- Interface grafica pronta para demonstrar o sistema na apresentacao.
-- Documento final com explicacao e conclusao pronto.
-- Cada integrante sabe explicar a propria parte na apresentacao.
+- [x] Todas as classes compilam/executam sem erro.
+- [x] Todas as estruturas combinadas com o professor foram implementadas (hash + arvore + dominio).
+- [x] Hashing foi usado em busca principal.
+- [x] Arvore foi usada para ordenacao/relatorio.
+- [x] Interface grafica pronta para demonstrar o sistema na apresentacao.
+- [x] Documento final com explicacao e conclusao pronto.
+- [x] Cada integrante sabe explicar a propria parte na apresentacao.
 
 ---
 
