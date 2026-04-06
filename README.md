@@ -23,8 +23,13 @@ Há duas formas de uso: **console** (`LojaApp`) e **interface gráfica Swing** (
 Adicione 3 ou mais screenshots do projeto em funcionamento aqui.
 
 1. Tela principal da interface gráfica (abas Clientes / Cartões / Solicitações)
+![Aba clientes GUI](img/AbaClientesGUI.png)
+![Aba cartões GUI](img/AbaCartoesGUI.png)
+![Aba solicitações GUI](img/AbaSolicitacoesGUI.png)
 2. Menu de opções no console
-3. Listagem ordenada por nome ou fluxo de solicitações na GUI
+![Menu no console](img/MenuConsole.png)
+3. Listagem ordenada por nome ou fluxo de solicitações na GUI (adicionei Ana Julia para teste):
+![Listado por nome GUI](img/PorNomeGUI.png)
 
 ## Instalação 
 Linguagem: Java 17<br>
