@@ -22,6 +22,17 @@
                 <configuration>
                     <mainClass>br.unb.eda2.loja.LojaApp</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>gui</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>br.unb.eda2.loja.LojaGuiApp</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

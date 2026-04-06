@@ -10,6 +10,7 @@ import br.unb.eda2.loja.repositorio.ClienteRepositorio;
 import br.unb.eda2.loja.repositorio.SolicitacaoRepositorio;
 import br.unb.eda2.loja.repositorio.memoria.CartaoRepositorioMemoria;
 import br.unb.eda2.loja.repositorio.memoria.ClienteRepositorioMemoria;
+import br.unb.eda2.loja.demo.DadosExemplo;
 import br.unb.eda2.loja.repositorio.memoria.HistoricoSolicitacaoRepositorioMemoria;
 import br.unb.eda2.loja.repositorio.memoria.SolicitacaoRepositorioMemoria;
 import br.unb.eda2.loja.servico.CancelamentoService;
@@ -38,6 +39,10 @@ public final class LojaApp {
         SolicitacaoRepositorio solicitacoes = new SolicitacaoRepositorioMemoria(cartoes);
         HistoricoSolicitacaoRepositorioMemoria historicoRepo = new HistoricoSolicitacaoRepositorioMemoria();
         CancelamentoService cancelamento = new CancelamentoService(clientes, cartoes, solicitacoes, historicoRepo);
+
+        if (DadosExemplo.deveCarregar(args)) {
+            DadosExemplo.popular(clientes, cartoes, cancelamento);
+        }
 
         try (Scanner in = new Scanner(System.in)) {
             boolean sair = false;

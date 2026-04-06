@@ -111,27 +111,26 @@ Este documento organiza exatamente:
 
 ---
 
-## Etapa 4 - Conteudo exigido da disciplina (buscas sequenciais)
+## Etapa 4 - Interface grafica (apresentacao)
 
-**Meta:** implementar todos os metodos pedidos pelo professor.
+**Meta:** deixar o sistema mais claro para demonstrar na apresentacao, alem do menu no terminal.
 
 ### Lucas faz
 
-- Busca sequencial normal.
-- Busca sequencial com sentinela.
-- Busca sequencial com mover para frente.
-- Criar comparacao de numero de comparacoes entre os 3 metodos.
-
-### Mariiana faz
-
-- Busca sequencial com transposicao.
-- Busca sequencial indexada com indice primario.
-- Busca sequencial indexada com indice primario e secundario.
-- Criar comparacao de numero de comparacoes entre os 3 metodos.
+- [x] Escolher stack com o grupo (ex.: Java Swing, JavaFX ou outra acordada com a disciplina).
+- [x] Definir telas ou fluxos principais (cadastro, buscas, cancelamento, listagens).
+- [x] Integrar a camada de servico/repositorio existente na interface (sem duplicar regra de negocio).
+- [x] Tratamento basico de erros na UI (mensagens ao usuario, campos invalidos).
+- [x] Layout, navegacao e consistencia visual (cores, espacamentos, titulos).
+- [x] Formularios e tabelas/listas para exibir resultados (clientes, cartoes, solicitacoes).
+- [x] Garantir que fluxos criticos do cancelamento fiquem faceis de mostrar ao professor.
+- [ ] Capturar prints ou roteiro de demo para a etapa final.
 
 ### Entregavel da etapa
 
-- Modulo de testes/benchmark com os 6 algoritmos implementados.
+- Aplicacao com interface grafica executavel, cobrindo os fluxos principais do sistema.
+- Classe principal: `br.unb.eda2.loja.LojaGuiApp` — executar: `mvn compile exec:java@gui` (terminal continua com `mvn compile exec:java`).
+- `LojaApp` (terminal) pode permanecer como opcao de teste rapido ou ser desativado depois — combinar no grupo.
 
 ---
 
@@ -141,14 +140,15 @@ Este documento organiza exatamente:
 
 ### Lucas faz
 
-- Escrever documentacao tecnica:
-  - arquitetura do sistema
-  - justificativa das estruturas (hash + arvore + buscas)
-  - analise de complexidade (Big-O)
-- Revisar padrao dos nomes de classes e metodos.
+- [x] Montar cenario de **dados de exemplo** para testes e demo (`br.unb.eda2.loja.demo.DadosExemplo`): clientes, cartoes e solicitacoes em varios status; carrega ao iniciar por padrao; usar argumento `--sem-demo` no `main` para comecar sem dados.
 
 ### Mariiana faz
 
+- [ ] Escrever documentacao tecnica:
+  - arquitetura do sistema
+  - justificativa das estruturas (hash + arvore)
+  - analise de complexidade (Big-O)
+- [ ] Revisar padrao dos nomes de classes e metodos.
 - Criar testes de cenarios:
   - cliente nao encontrado
   - cartao ja cancelado
@@ -159,16 +159,17 @@ Este documento organiza exatamente:
 ### Entregavel da etapa
 
 - Projeto completo, testado e documentado.
+- Roteiro de testes usando os dados de exemplo (e casos de erro manual).
 
 ---
 
 ## Checklist final antes de entregar
 
 - Todas as classes compilam/executam sem erro.
-- Todas as estruturas pedidas pelo professor foram implementadas.
+- Todas as estruturas combinadas com o professor foram implementadas (hash + arvore + dominio).
 - Hashing foi usado em busca principal.
 - Arvore foi usada para ordenacao/relatorio.
-- Os 6 tipos de busca sequencial foram demonstrados.
+- Interface grafica pronta para demonstrar o sistema na apresentacao.
 - Documento final com explicacao e conclusao pronto.
 - Cada integrante sabe explicar a propria parte na apresentacao.
 
@@ -181,14 +182,15 @@ Este documento organiza exatamente:
 - Entidades e validacoes
 - Hashing
 - Regras principais de cancelamento
-- 3 buscas sequenciais (normal, sentinela, mover para frente)
+- Integracao da interface grafica com servicos/repositorios
+- Dados de exemplo (`DadosExemplo`) e opcao `--sem-demo`
 - Documentacao tecnica e Big-O
 
 ### Mariiana
 
-- Repositorios e menu
+- Repositorios e menu (terminal)
 - Arvore e relatorios ordenados
 - Fluxo de analise/historico de solicitacoes
-- 3 buscas sequenciais (transposicao, indexada primaria, indexada primaria+secundaria)
+- Layout, telas e roteiro de demo na interface grafica
 - Testes finais e evidencias da apresentacao
 
