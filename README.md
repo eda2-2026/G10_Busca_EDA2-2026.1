@@ -15,33 +15,40 @@ Conteúdo da Disciplina: Busca<br>
 [Link para o vídeo de apresentação]()
 
 ## Sobre 
-Este projeto implementa um sistema de gerenciamento para uma loja, utilizando estruturas de dados avançadas como tabelas hash para armazenamento eficiente de cartões e clientes, e árvores para ordenação de clientes por nome. O sistema permite o cadastro de clientes, gerenciamento de cartões de crédito/débito, e processamento de solicitações de cancelamento, com histórico de alterações. 
+Este projeto implementa um sistema de gerenciamento para uma loja, utilizando **tabelas hash** (encadeamento separado) para busca de clientes e cartões, e uma **árvore binária de busca** (`ArvoreClientesPorNome`) para ordenação alfabética de clientes via percurso **in-order**. O sistema permite cadastro de clientes, gerenciamento de cartões e processamento de solicitações de cancelamento, com histórico de alterações.
 
-O projeto inclui duas interfaces: uma versão console (LojaApp) e uma versão gráfica (LojaGuiApp) utilizando Java Swing. As estruturas de dados são implementadas manualmente para fins educacionais, demonstrando conceitos de hashing, colisões e balanceamento de árvores.
+Há duas formas de uso: **console** (`LojaApp`) e **interface gráfica Swing** (`LojaGuiApp`). As estruturas são implementadas manualmente para fins educacionais (hashing, colisões, BST).
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento aqui.
 
-1. Tela principal da interface gráfica
+1. Tela principal da interface gráfica (abas Clientes / Cartões / Solicitações)
 2. Menu de opções no console
-3. Relatório de clientes
+3. Listagem ordenada por nome ou fluxo de solicitações na GUI
 
 ## Instalação 
-Linguagem: Java<br>
-Framework: Swing (para interface gráfica)<br>
-Pré-requisitos: Java 8 ou superior, Maven instalado.
+Linguagem: Java 17<br>
+Interface gráfica: Swing<br>
+Pré-requisitos: **JDK 17** (ou superior compatível com `release` 17 do Maven) e **Maven** instalados.
 
 Comandos para instalação e execução:
 1. Clone o repositório: `git clone https://github.com/eda2-2026/G10_Busca_EDA2-2026.1.git`
 2. Navegue para o diretório: `cd G10_Busca_EDA2-2026.1`
 3. Compile o projeto: `mvn compile`
-4. Execute a versão console: `mvn exec:java -Dexec.mainClass="br.unb.eda2.loja.LojaApp"`
-5. Execute a versão gráfica: `mvn exec:java -Dexec.mainClass="br.unb.eda2.loja.LojaGuiApp"`
+4. **Console:** `mvn exec:java` (usa `LojaApp` por padrão no `pom.xml`)  
+   ou explicitamente: `mvn exec:java -Dexec.mainClass="br.unb.eda2.loja.LojaApp"`
+5. **Gráfica:** `mvn exec:java@gui`  
+   ou: `mvn exec:java -Dexec.mainClass="br.unb.eda2.loja.LojaGuiApp"`
+
+Por padrão a GUI carrega **dados de exemplo** para demonstração. Para iniciar vazia:  
+`mvn exec:java@gui -Dexec.args="--sem-demo"`
 
 ## Uso 
-Após executar o comando de instalação, o sistema estará rodando. Na versão console, siga as opções do menu para cadastrar clientes, gerenciar cartões e processar solicitações. Na versão gráfica, utilize os painéis para navegar pelas funcionalidades: PainelClientes para gerenciar clientes, PainelCartoes para cartões, e PainelSolicitacoes para solicitações de cancelamento.
+Na versão **console**, siga o menu para cadastrar clientes, cartões e solicitações de cancelamento.
 
-Para gerar relatórios, utilize as opções disponíveis no menu ou interface gráfica.
+Na versão **gráfica**, use as abas: **Clientes** (`PainelClientes`), **Cartões** (`PainelCartoes`) e **Solicitações** (`PainelSolicitacoes`) — cancelamento, filtro por status e histórico.
+
+Relatórios agregados (por status, motivo e período) estão implementados em **`RelatorioService`** e na documentação técnica (`DOCUMENTACAO_TECNICA.md`); não há tela dedicada a eles na Swing neste momento.
 
 ## Outros 
-O projeto inclui testes unitários na pasta `test/`, que podem ser executados com `mvn test`. As estruturas de dados implementadas incluem TabelaHash para cartões e clientes, ArvoreClientesPorNome para ordenação, e demonstrações de colisões em tabelas hash. O sistema utiliza repositórios em memória para persistência simples.
+Testes unitários em `test/`: `mvn test`. Estruturas: `TabelaHashClientes`, `TabelaHashCartoes`, `ArvoreClientesPorNome`; repositórios em memória. Há material sobre colisão em hash no pacote `estrutura` (ex.: `DemonstracaoColisaoTabelaHash`).
