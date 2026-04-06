@@ -1,6 +1,8 @@
 package br.unb.eda2.loja.ui;
 
+import br.unb.eda2.loja.dominio.Cartao;
 import br.unb.eda2.loja.dominio.Cliente;
+import br.unb.eda2.loja.repositorio.CartaoRepositorio;
 import br.unb.eda2.loja.repositorio.ClienteRepositorio;
 
 import javax.swing.BorderFactory;
@@ -9,8 +11,11 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -20,10 +25,14 @@ import java.util.List;
 
 /**
  * Cadastro e buscas de clientes (hash + árvore por trás do repositório).
+ * Abaixo da tabela de clientes: cartões da pessoa selecionada (status, limite, etc.).
  */
 public class PainelClientes extends JPanel {
 
     private final ClienteRepositorio repo;
+    private final CartaoRepositorio repoCartoes;
+
+    private final JLabel rotuloCartoes = new JLabel("Selecione um cliente na tabela acima para ver os cartões.");
 
     private final JTextField campoId = new JTextField(8);
     private final JTextField campoNome = new JTextField(18);
@@ -46,8 +55,18 @@ public class PainelClientes extends JPanel {
     };
     private final JTable tabela = new JTable(modelo);
 
-    public PainelClientes(ClienteRepositorio repo) {
+    private final DefaultTableModel modeloCartoes = new DefaultTableModel(
+            new Object[] { "id cartão", "número", "bandeira", "limite", "status" }, 0) {
+        @Override
+        public boolean isCellEditable(int r, int c) {
+            return false;
+        }
+    };
+    private final JTable tabelaCartoes = new JTable(modeloCartoes);
+
+    public PainelClientes(ClienteRepositorio repo, CartaoRepositorio cartoes) {
         this.repo = repo;
+        this.repoCartoes = cartoes;
         setLayout(new BorderLayout(6, 6));
         setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
@@ -114,11 +133,44 @@ public class PainelClientes extends JPanel {
         centro.add(norte, BorderLayout.NORTH);
         centro.add(buscas, BorderLayout.CENTER);
 
-        add(centro, BorderLayout.NORTH);
         tabela.setFillsViewportHeight(true);
-        add(new JScrollPane(tabela), BorderLayout.CENTER);
+        tabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabela.getSelectionModel().addListSelectionListener(this::aoMudarSelecaoCliente);
+
+        JPanel sulCartoes = new JPanel(new BorderLayout(4, 4));
+        sulCartoes.setBorder(BorderFactory.createTitledBorder("Cartões deste cliente"));
+        JPanel topoCartoes = new JPanel(new BorderLayout());
+        topoCartoes.add(rotuloCartoes, BorderLayout.WEST);
+        sulCartoes.add(topoCartoes, BorderLayout.NORTH);
+        tabelaCartoes.setFillsViewportHeight(true);
+        sulCartoes.add(new JScrollPane(tabelaCartoes), BorderLayout.CENTER);
+
+        JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(tabela), sulCartoes);
+        split.setResizeWeight(0.42);
+        split.setOneTouchExpandable(true);
+
+        add(centro, BorderLayout.NORTH);
+        add(split, BorderLayout.CENTER);
 
         atualizarTabelaInicial();
+    }
+
+    private void aoMudarSelecaoCliente(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting()) {
+            return;
+        }
+        int row = tabela.getSelectedRow();
+        if (row < 0) {
+            limparCartoes();
+            return;
+        }
+        try {
+            long id = Long.parseLong(modelo.getValueAt(row, 0).toString());
+            String nome = modelo.getValueAt(row, 1).toString();
+            preencherCartoes(id, nome);
+        } catch (Exception ex) {
+            limparCartoes();
+        }
     }
 
     /** Recarrega a grade com tudo que está no repositório (útil após carregar dados de exemplo). */
@@ -144,6 +196,7 @@ public class PainelClientes extends JPanel {
             repo.salvar(c);
             UiAjuda.info("Cliente salvo.");
             listarTodos();
+            selecionarClientePorId(id);
         } catch (Exception ex) {
             UiAjuda.erro(ex.getMessage() != null ? ex.getMessage() : ex.toString());
         }
@@ -175,6 +228,17 @@ public class PainelClientes extends JPanel {
     private void mostrarUm(Cliente c) {
         modelo.setRowCount(0);
         addLinha(c);
+        selecionarClientePorId(c.getId());
+    }
+
+    /** Seleciona a linha do cliente para disparar a lista de cartões (sem depender do clique manual). */
+    private void selecionarClientePorId(long idCliente) {
+        for (int r = 0; r < modelo.getRowCount(); r++) {
+            if (Long.parseLong(modelo.getValueAt(r, 0).toString()) == idCliente) {
+                tabela.setRowSelectionInterval(r, r);
+                return;
+            }
+        }
     }
 
     private void addLinha(Cliente c) {
@@ -192,6 +256,7 @@ public class PainelClientes extends JPanel {
             for (Cliente c : lista) {
                 addLinha(c);
             }
+            limparCartoes();
         } catch (Exception ex) {
             UiAjuda.erro(ex.getMessage() != null ? ex.getMessage() : ex.toString());
         }
@@ -204,8 +269,29 @@ public class PainelClientes extends JPanel {
             for (Cliente c : lista) {
                 addLinha(c);
             }
+            limparCartoes();
         } catch (Exception ex) {
             UiAjuda.erro(ex.getMessage() != null ? ex.getMessage() : ex.toString());
+        }
+    }
+
+    private void limparCartoes() {
+        tabela.clearSelection();
+        modeloCartoes.setRowCount(0);
+        rotuloCartoes.setText("Selecione um cliente na tabela acima para ver os cartões.");
+    }
+
+    private void preencherCartoes(long idCliente, String nomeCliente) {
+        List<Cartao> lista = repoCartoes.listarPorIdCliente(idCliente);
+        lista.sort(Comparator.comparingLong(Cartao::getId));
+        modeloCartoes.setRowCount(0);
+        rotuloCartoes.setText("Cliente id=" + idCliente + " — " + nomeCliente + "  ·  "
+                + lista.size() + " cartão(ões)");
+        for (Cartao z : lista) {
+            modeloCartoes.addRow(new Object[] {
+                    z.getId(), z.getNumeroMascarado(), z.getBandeira(),
+                    z.getLimite().toPlainString(), z.getStatus().name()
+            });
         }
     }
 

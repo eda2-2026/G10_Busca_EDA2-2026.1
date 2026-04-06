@@ -23,7 +23,7 @@ public class JanelaLoja extends JFrame {
         setLocationByPlatform(true);
 
         JTabbedPane abas = new JTabbedPane();
-        abas.addTab("Clientes", new PainelClientes(clientes));
+        abas.addTab("Clientes", new PainelClientes(clientes, cartoes));
         abas.addTab("Cartões", new PainelCartoes(cartoes));
         abas.addTab("Solicitações", new PainelSolicitacoes(solicitacoes, cancelamento));
 
