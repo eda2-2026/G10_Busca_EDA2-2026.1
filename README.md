@@ -12,7 +12,7 @@ Conteúdo da Disciplina: Busca<br>
 
 ## Apresentação
 
-[Link para o vídeo de apresentação]()
+[Link para o vídeo de apresentação](https://youtu.be/Mv5UjDIlmEA)
 
 ## Sobre 
 Este projeto implementa um sistema de gerenciamento para uma loja, utilizando **tabelas hash** (encadeamento separado) para busca de clientes e cartões, e uma **árvore binária de busca** (`ArvoreClientesPorNome`) para ordenação alfabética de clientes via percurso **in-order**. O sistema permite cadastro de clientes, gerenciamento de cartões e processamento de solicitações de cancelamento, com histórico de alterações.
